@@ -5,23 +5,64 @@ To write a python program to implement multivariate linear regression and predic
 1.	Hardware – PCs
 2.	Anaconda – Python 3.7 Installation / Moodle-Code Runner
 ## Algorithm:
-### Step1
-<br>
+Step1
+import pandas as pd.
 
-### Step2
-<br>
+Step2
+Read the csv file.
 
-### Step3
-<br>
+Step3
+Get the value of X and y variables
 
-### Step4
-<br>
+Step4
+Create the linear regression model and fit.
 
-### Step5
-<br>
+Step5
+Predict the CO2 emission of a car where the weight is 2300kg, and the volume is 1300cm cube.
+
 
 ## Program:
 ```
+import matplotlib.pyplot as plt
+import numpy as np
+
+from sklearn import datasets, linear_model, metrics
+from sklearn.model_selection import train_test_split
+
+california = datasets.fetch_california_housing()
+
+X = california.data
+y = california.target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.4, random_state=1
+)
+
+reg = linear_model.LinearRegression()
+reg.fit(X_train, y_train)
+
+print('Coefficients:', reg.coef_)
+print('Variance score: {}'.format(reg.score(X_test, y_test)))
+
+plt.style.use('fivethirtyeight')
+
+plt.scatter(
+    reg.predict(X_train),
+    reg.predict(X_train) - y_train,
+    color="green", s=10, label='Train data'
+)
+
+plt.scatter(
+    reg.predict(X_test),
+    reg.predict(X_test) - y_test,
+    color="blue", s=10, label='Test data'
+)
+
+plt.hlines(y=0, xmin=min(y_test), xmax=max(y_test), linewidth=2)
+plt.legend(loc='upper right')
+
+plt.title("Residual errors (California Housing)")
+plt.show()
 
 
 
@@ -30,6 +71,7 @@ To write a python program to implement multivariate linear regression and predic
 
 ```
 ## Output:
+![WhatsApp Image 2025-12-18 at 10 59 54 AM](https://github.com/user-attachments/assets/86a225fd-734b-4864-b121-9872abe94435)
 
 ### Insert your output
 
